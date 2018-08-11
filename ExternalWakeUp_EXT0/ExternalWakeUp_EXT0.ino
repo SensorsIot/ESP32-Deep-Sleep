@@ -28,9 +28,9 @@ RTC_DATA_ATTR int bootCount = 0;
   has been awaken from sleep
 */
 void print_wakeup_reason() {
-  esp_deep_sleep_wakeup_cause_t wakeup_reason;
+  esp_sleep_wakeup_cause_t wakeup_reason;
 
-  wakeup_reason = esp_deep_sleep_get_wakeup_cause();
+  wakeup_reason = esp_sleep_get_wakeup_cause();
 
   Serial.println("");
   Serial.println("");
@@ -69,10 +69,13 @@ void setup() {
     Note that using internal pullups/pulldowns also requires
     RTC peripherals to be turned on.
   */
-  Serial.println(esp_deep_sleep_enable_ext0_wakeup(GPIO_NUM_39, 1)); //1 = High, 0 = Low
+  Serial.println(esp_sleep_enable_ext0_wakeup(GPIO_NUM_39, 1)); //1 = High, 0 = Low
 
   //Go to sleep now
   Serial.println("Going to sleep now");
+  //you need a delay, otherwise the Serial.println beforehand will never be outputed (on LOLIN32 1.0.0)
+  delay(1000);
+  
   esp_deep_sleep_start();
   Serial.println("This will never be printed");
 }
