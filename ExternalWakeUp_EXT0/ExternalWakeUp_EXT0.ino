@@ -73,8 +73,7 @@ void setup() {
 
   //Go to sleep now
   Serial.println("Going to sleep now");
-  //you need a delay, otherwise the Serial.println beforehand will never be outputed (on LOLIN32 1.0.0)
-  delay(1000);
+  Serial.flush();
   
   esp_deep_sleep_start();
   Serial.println("This will never be printed");
