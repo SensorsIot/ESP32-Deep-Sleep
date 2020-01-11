@@ -26,11 +26,12 @@ void print_wakeup_reason(){
 
   switch(wakeup_reason)
   {
-    case 1  : Serial.println("Wakeup caused by external signal using RTC_IO"); break;
-    case 2  : Serial.println("Wakeup caused by external signal using RTC_CNTL"); break;
-    case 3  : Serial.println("Wakeup caused by timer"); break;
-    case 4  : Serial.println("Wakeup caused by touchpad"); break;
-    case 5  : Serial.println("Wakeup caused by ULP program"); break;
+    case ESP_SLEEP_WAKEUP_EXT0      : Serial.println("Wakeup caused by external signal using RTC_IO"); break;
+    case ESP_SLEEP_WAKEUP_EXT1      : Serial.println("Wakeup caused by external signal using RTC_CNTL"); break;
+    case ESP_SLEEP_WAKEUP_TIMER     : Serial.println("Wakeup caused by timer"); break;
+    case ESP_SLEEP_WAKEUP_TOUCHPAD  : Serial.println("Wakeup caused by touchpad"); break;
+    case ESP_SLEEP_WAKEUP_ULP       : Serial.println("Wakeup caused by ULP program"); break;
+    case ESP_SLEEP_WAKEUP_UNDEFINED : Serial.println("Wakeup caused is undefined"); break;
     default : Serial.println("Wakeup was not caused by deep sleep"); break;
   }
 }
