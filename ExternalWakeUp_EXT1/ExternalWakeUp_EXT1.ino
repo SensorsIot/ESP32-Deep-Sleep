@@ -31,9 +31,9 @@ RTC_DATA_ATTR int bootCount = 0;
   has been awaken from sleep
 */
 void print_wakeup_reason() {
-  esp_deep_sleep_wakeup_cause_t wakeup_reason;
+  esp_sleep_wakeup_cause_t wakeup_reason;
 
-  wakeup_reason = esp_deep_sleep_get_wakeup_cause();
+  wakeup_reason = esp_sleep_get_wakeup_cause();
 
   Serial.println("");
   Serial.println("");
@@ -44,7 +44,7 @@ void print_wakeup_reason() {
     case 1  : Serial.println("Wakeup caused by external signal using RTC_IO"); break;
     case 2  : {
         Serial.print("Wakeup caused by external signal using RTC_CNTL ");
-        Serial.println((uint32_t)esp_deep_sleep_get_ext1_wakeup_status(),HEX);
+        Serial.println((uint32_t)esp_sleep_get_ext1_wakeup_status(),HEX);
         print64(BUTTON_PIN_BITMASK);
         Serial.println();
 
@@ -88,10 +88,11 @@ void setup() {
   */
 
   //If you were to use ext1, you would use it like
-  Serial.println(esp_deep_sleep_enable_ext1_wakeup(BUTTON_PIN_BITMASK, ESP_EXT1_WAKEUP_ANY_HIGH));
+  Serial.println(esp_sleep_enable_ext1_wakeup(BUTTON_PIN_BITMASK, ESP_EXT1_WAKEUP_ANY_HIGH));
 
   //Go to sleep now
   Serial.println("Going to sleep now");
+  Serial.flush();
   esp_deep_sleep_start();
   Serial.println("This will never be printed");
 }
